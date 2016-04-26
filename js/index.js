@@ -177,7 +177,7 @@ $(document).ready(function() {
   }
 
   redraw.addEventListener('click', function(e) {
-    var anim = redraw.style.webkitAnimationName = ('rotator');
+  redraw.style.webkitAnimationName = ('rotator');
     redraw.addEventListener('webkitAnimationEnd', function() {
       redraw.style.webkitAnimationName = (null);
     });
