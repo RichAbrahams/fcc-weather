@@ -1,0 +1,252 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans");
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  min-height: 100vh;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #6a1b9a;
+  font-family: 'Open Sans', sans-serif;
+}
+p {
+  margin: 0;
+  bottom: 0;
+}
+.wrapper {
+  width: 100%;
+  height: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+@media only screen and (max-width: 1200px) {
+  .wrapper {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+}
+#map {
+  height: 100vh;
+  width: 50vw;
+}
+@media only screen and (max-width: 1200px) {
+  #map {
+    height: 50vh;
+    width: 100vw;
+  }
+}
+.info {
+  height: 100vh;
+  width: 50vw;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  padding: 2rem;
+  background-color: #6a1b9a;
+}
+@media only screen and (max-width: 1200px) {
+  .info {
+    height: auto;
+    width: 100vw;
+    padding: 1rem;
+    padding-top: 2rem;
+  }
+}
+@media only screen and (max-width: 800px) {
+  .info {
+    padding-top: 1rem;
+  }
+}
+.title,
+.location,
+.summary,
+.temperature,
+.pressure,
+.windSpeed {
+  padding-top: 1rem;
+  color: #fff;
+  text-align: center;
+  font-size: calc(1rem + 0.75 * ((100vw - 26.25rem) / 48.75));
+}
+@media screen and (min-width: 1200px){
+  .title,
+.location,
+.summary,
+.temperature,
+.pressure,
+.windSpeed{
+    font-size: 1.75rem;
+  }
+}
+@media screen and (max-width: 420px){
+  .title,
+.location,
+.summary,
+.temperature,
+.pressure,
+.windSpeed{
+    font-size: 1rem;
+  }
+}
+@media only screen and (max-width: 1200px) {
+  .title,
+  .location,
+  .summary,
+  .temperature,
+  .pressure,
+  .windSpeed {
+    padding-top: 1rem;
+    max-width: 50%;
+  }
+}
+.title {
+  padding-bottom: 1rem;
+  font-weight: bold;
+}
+@media only screen and (max-width: 800px) {
+  .title {
+    padding-top: 0;
+  }
+}
+.icon {
+  padding: 0;
+  padding-top: 10px;
+  height: 150px;
+}
+@media only screen and (max-width: 1200px) {
+  .icon {
+    padding-top: 5px;
+    height: 100px;
+  }
+}
+@media only screen and (max-width: 800px) {
+  .icon {
+    display: none;
+  }
+}
+@media only screen and (max-width: 1200px) {
+  .icon > img {
+    height: 100px;
+    width: 100px;
+  }
+}
+.summary {
+  padding: 0;
+}
+@media only screen and (max-width: 1200px) {
+  .summary {
+    padding-top: 1rem;
+  }
+}
+.mapContainer {
+  position: relative;
+}
+.redraw {
+  width: 60px;
+  height: 60px;
+  color: #6a1b9a;
+  border: 5px solid #6a1b9a;
+  border-radius: 30px;
+  background-color: rgba(255,255,255,0.8);
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  z-index: 3;
+  font-size: 1rem;
+  -webkit-animation-iteration-count: 1;
+          animation-iteration-count: 1;
+  -webkit-animation-duration: 1s;
+          animation-duration: 1s;
+  -webkit-animation-timing-function: linear;
+          animation-timing-function: linear;
+  position: absolute;
+  top: 50px;
+  right: 50px;
+  z-index: 99;
+}
+@media only screen and (max-width: 800px) {
+  .redraw {
+    top: 20px;
+    right: 20px;
+  }
+}
+.iconCont {
+  -webkit-animation-name: rotator;
+          animation-name: rotator;
+  -webkit-animation-iteration-count: 1000;
+          animation-iteration-count: 1000;
+}
+@-webkit-keyframes rotator {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  25% {
+    -webkit-transform: rotate(90deg);
+            transform: rotate(90deg);
+  }
+  50% {
+    -webkit-transform: rotate(180deg);
+            transform: rotate(180deg);
+  }
+  75% {
+    -webkit-transform: rotate(270deg);
+            transform: rotate(270deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+@keyframes rotator {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  25% {
+    -webkit-transform: rotate(90deg);
+            transform: rotate(90deg);
+  }
+  50% {
+    -webkit-transform: rotate(180deg);
+            transform: rotate(180deg);
+  }
+  75% {
+    -webkit-transform: rotate(270deg);
+            transform: rotate(270deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
