@@ -13,6 +13,8 @@ $(document).ready(function() {
   var weatherStatesIcons = ["Sun.svg", "Moon.svg", "Cloud-Rain.svg", "Cloud-Snow.svg", "Cloud-Hail.svg", "Wind.svg", "Cloud-Fog.svg", "Cloud.svg", "Cloud-Sun.svg", "Cloud-Moon.svg", "Cloud.svg"];
   var map;
 
+// Get geolocation coordinates
+
   function getCoords(updateMap) {
     if (updateMap){
     return new Promise(function(resolve, reject) {
@@ -26,6 +28,8 @@ $(document).ready(function() {
     return Promise.resolve(data);
   }
   }
+
+// Ajax address from googleapis
 
   function getAddress(coords) {
     return new Promise(function(resolve, reject) {
@@ -43,6 +47,8 @@ $(document).ready(function() {
       });
     });
   }
+
+// Ajax weather report from forcast.io
 
   function getWeather(coords) {
     return new Promise(function(resolve, reject) {
@@ -65,6 +71,8 @@ $(document).ready(function() {
 
     });
   }
+
+// Parse out usable address from googles address object
 
   function parseAddress(address) {
     var container = [];
@@ -89,6 +97,8 @@ $(document).ready(function() {
     return filteredContainer;
   }
 
+// gather required info from forcast.io report
+
   function parseWeatherData(report) {
     report.summary = report.weather.currently.summary;
     report.icon = report.weather.currently.icon;
@@ -98,6 +108,8 @@ $(document).ready(function() {
     report.temperatureC = Math.floor((report.temperatureF - 32) / 1.8);
     return report;
   }
+
+// draw google map onscreen
 
   function createMap(lat, lon) {
     map = new google.maps.Map(document.getElementById('map'), {
@@ -116,11 +128,15 @@ $(document).ready(function() {
     return;
   }
 
+// select correct icon image link using weatherStates and weatherStatesIcons arrays
+
   function iconSelect(data) {
     var position = weatherStates.indexOf(data);
     var imageLink = "images/" + weatherStatesIcons[position];
     return imageLink;
   }
+
+// add text to relevant divs to display report on screen
 
   function updateScreen(report) {
     if (report.updateMap) {
@@ -135,12 +151,15 @@ $(document).ready(function() {
     icon.innerHTML = "<img src='" + iconLink + "' alt='weather icon' fill='white'/>";
   }
 
+// initiate address parsing
+
   function parseReport(report) {
     report.address = parseAddress(report.address);
     report = parseWeatherData(report);
     updateScreen(report);
   }
 
+// main data gathering controller
 
   function createReport(updateMap) {
     var report = {};
@@ -165,6 +184,8 @@ $(document).ready(function() {
     return;
   }
 
+// ajax failure fallback
+
   function dataFail() {
     {
       location.innerHTML = "Data current unavailable, please try another location or check back later";
@@ -173,8 +194,14 @@ $(document).ready(function() {
       pressure.innerHTML = "";
       windSpeed.innerHTML = "";
       icon.innerHTML = "";
+      if (document.getElementById('map').innerHTML===""){
+        document.getElementById('map').innerHTML="<div class ='noData'> <i class='fa fa-frown-o fa-5x' aria-hidden='true'></i></div>";
+        document.querySelector('.redraw').style.display="none";
+      }
     }
   }
+
+// refresh screen button controls
 
   redraw.addEventListener('click', function(e) {
   redraw.style.webkitAnimationName = ('rotator');
@@ -183,6 +210,8 @@ $(document).ready(function() {
     });
     createReport(false);
   });
+
+// run on startUp to generate new map
 
   function startUp() {
     createReport(true);
